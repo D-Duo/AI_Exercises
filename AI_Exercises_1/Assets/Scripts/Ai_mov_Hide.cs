@@ -8,7 +8,7 @@ public class Ai_mov_Hide : MonoBehaviour
     public UnityEngine.AI.NavMeshAgent agent;
 
     GameObject[] hidingSpots;
-    hidingSpots = GameObject.FindGameObjectsWithTag("hide");
+    //hidingSpots = GameObject.FindGameObjectsWithTag("hide");
 
     float freq = 0f;
 
@@ -25,17 +25,17 @@ public class Ai_mov_Hide : MonoBehaviour
 
     void Hide()
     {
-        Func<GameObject, float> distance =
-            (hs) => Vector3.Distance(target.transform.position,
-                                     hs.transform.position);
-        GameObject hidingSpot = hidingSpots.Select(
-            ho => (distance(ho), ho)
-            ).Min().Item2;
-        Vector3 dir = hidingSpot.transform.position - target.transform.position;
-        Ray backRay = new Ray(hidingSpot.transform.position, -dir.normalized);
-        RaycastHit info;
-        hidingSpot.GetComponent<Collider>().Raycast(backRay, out info, 50f);
+    //    Func<GameObject, float> distance =
+    //        (hs) => Vector3.Distance(target.transform.position,
+    //                                 hs.transform.position);
+    //    GameObject hidingSpot = hidingSpots.Select(
+    //        ho => (distance(ho), ho)
+    //        ).Min().Item2;
+    //    Vector3 dir = hidingSpot.transform.position - target.transform.position;
+    //    Ray backRay = new Ray(hidingSpot.transform.position, -dir.normalized);
+    //    RaycastHit info;
+    //    hidingSpot.GetComponent<Collider>().Raycast(backRay, out info, 50f);
 
-        agent.destination = (info.point + dir.normalized);
+    //    agent.destination = (info.point + dir.normalized);
     }
 }
