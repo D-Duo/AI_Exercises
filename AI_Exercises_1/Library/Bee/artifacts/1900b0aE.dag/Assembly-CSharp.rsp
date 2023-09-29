@@ -359,6 +359,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/Ai_mov_Hide.cs"
 "Assets/Scripts/Ai_mov_Path.cs"
+"Assets/Scripts/Ai_mov_Scripts.cs"
 "Assets/Scripts/Ai_mov_Seek.cs"
 "Assets/Scripts/Ai_mov_Wander.cs"
 -langversion:9.0
