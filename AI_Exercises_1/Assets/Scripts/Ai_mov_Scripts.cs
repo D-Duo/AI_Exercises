@@ -9,8 +9,8 @@ public class Ai_mov_Scripts : MonoBehaviour
     public GameObject target;
 
     public string movScript = "none";
-    [Range(0, 100)] public float speed = 0.5f;
-    [Range(1, 500)] public float walkRadius = 50f;
+    [Range(0, 100)] public float speed = 5f;
+    [Range(1, 500)] public float walkRadius = 10f;
     [Range(0, 100)] public int maxRestingTime = 5;
 
     float freq = 0f;
