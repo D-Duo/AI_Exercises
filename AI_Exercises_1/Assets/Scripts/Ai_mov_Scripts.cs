@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Ai_mov_Scripts : MonoBehaviour
 {
-    public UnityEngine.AI.NavMeshAgent agent;
+    public NavMeshAgent agent;
     public GameObject target;
 
     public string movScript = "none";
@@ -13,15 +13,38 @@ public class Ai_mov_Scripts : MonoBehaviour
     [Range(1, 500)] public float walkRadius = 10f;
     [Range(0, 100)] public int maxRestingTime = 5;
 
+    public string waypointsTag = "none";
+    public GameObject[] waypoints;
+    int patrolWP = 0;
+    int direction = 0;
+
     float freq = 0f;
-    int restingTime = 0;
-
-
+    int restingTime = 1;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (waypoints.Length == 0)
+        {
+            if (waypointsTag != "none")
+            {
+                waypoints = GameObject.FindGameObjectsWithTag(waypointsTag);
+
+                if (waypoints.Length == 0)
+                {
+                    Debug.Log("No GameObjects are tagged with 'Waypoints1'");
+                }
+            }
+            else
+            {
+                Debug.Log("No Tags where specified");
+            }
+        }
+
         agent.speed = speed;
+        patrolWP = Random.Range(0, waypoints.Length);
+        direction = Random.Range(0, 2);
+
     }
 
     // Update is called once per frame
@@ -34,11 +57,19 @@ public class Ai_mov_Scripts : MonoBehaviour
             if (agent != null) {
                 switch (movScript)
                 {
+                    case "SeekTarget":
+                        break;
+
                     case "Wander":
                         Wander();
                         break;
 
-                    case "Seek":
+                    case "Follow":
+                        Follow();
+                        break;
+
+                    case "Patrol":
+                        Patrol();
                         break;
 
                     default:
@@ -48,7 +79,15 @@ public class Ai_mov_Scripts : MonoBehaviour
         }
     }
 
-    
+    void SeekTarget()
+    {
+        agent.destination = target.transform.position;
+    }
+
+    void Seek(Vector3 destination)
+    {
+        agent.SetDestination(destination);
+    }
 
     void Wander()
     {
@@ -64,7 +103,7 @@ public class Ai_mov_Scripts : MonoBehaviour
 
             if (restingTime == 0)
             {
-                agent.SetDestination(destination);
+                Seek(destination);
                 restingTime = Random.Range(0, maxRestingTime);
             }
             else if (restingTime >= 0)
@@ -74,8 +113,28 @@ public class Ai_mov_Scripts : MonoBehaviour
         }
     }
 
-    void Seek()
+    void Patrol()
     {
-        agent.destination = target.transform.position;
+        if (!agent.pathPending && agent.remainingDistance < 0.5)
+        {
+            Seek(waypoints[patrolWP].transform.position);
+            if (direction == 0) { patrolWP = (patrolWP + 1) % waypoints.Length; }
+            else { patrolWP = (patrolWP - 1) % waypoints.Length; }
+
+            if(patrolWP < 0) { patrolWP = waypoints.Length - 1; }
+        }
+    }
+
+    void Follow()
+    {
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        if(distance >= 1.5)
+        {
+            Seek(target.transform.position);
+        }
+        else
+        {
+            Seek(transform.position);
+        }
     }
 }
