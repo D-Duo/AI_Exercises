@@ -424,7 +424,7 @@ PrefabInstance:
       objectReference: {fileID: 714371280}
     - target: {fileID: 1708553840491592234, guid: e3fa6f82ac0cec441b0def6c1a6303b1, type: 3}
       propertyPath: movScript
-      value: Follow
+      value: SeekTarget
       objectReference: {fileID: 0}
     - target: {fileID: 3793794162162269329, guid: e3fa6f82ac0cec441b0def6c1a6303b1, type: 3}
       propertyPath: m_Name
@@ -572,8 +572,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 8
-  m_Acceleration: 15
+  m_Speed: 12
+  m_Acceleration: 18
   avoidancePriority: 50
   m_AngularSpeed: 180
   m_StoppingDistance: 0.1
@@ -597,13 +597,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 714371281}
-  target: {fileID: 0}
-  movScript: Patrol
-  speed: 5
+  target: {fileID: 1467381924}
+  movScript: GhostPatrol
+  speed: 16
   walkRadius: 10
   maxRestingTime: 5
+  humanBehaviour: 0
   waypointsTag: Waypoints1
-  waypoints: []
+  waypoints:
+  - {fileID: 1025706669}
+  - {fileID: 769609541}
+  - {fileID: 1176880325}
+  - {fileID: 1334163544}
 --- !u!135 &714371283
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -624,7 +629,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714371280}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1268,6 +1273,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1467381924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3793794162162269329, guid: e3fa6f82ac0cec441b0def6c1a6303b1, type: 3}
+  m_PrefabInstance: {fileID: 206431070}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1551963047
 GameObject:
   m_ObjectHideFlags: 0

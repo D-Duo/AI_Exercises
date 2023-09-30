@@ -12,6 +12,7 @@ public class Ai_mov_Scripts : MonoBehaviour
     [Range(0, 100)] public float speed = 5f;
     [Range(1, 500)] public float walkRadius = 10f;
     [Range(0, 100)] public int maxRestingTime = 5;
+    public bool humanBehaviour = true;
 
     public string waypointsTag = "none";
     public GameObject[] waypoints;
@@ -50,26 +51,30 @@ public class Ai_mov_Scripts : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        freq += Time.deltaTime;
-        if (freq > 0.5)
+        if(agent == null) { return; }
+
+        if (!humanBehaviour)
         {
-            freq -= 0.5f;
-            if (agent != null) {
+            freq += Time.deltaTime;
+            if (freq > 0.5)
+            {
+                freq -= 0.5f;
                 switch (movScript)
                 {
                     case "SeekTarget":
+                        SeekTarget();
                         break;
 
                     case "Wander":
                         Wander();
                         break;
 
-                    case "Follow":
-                        Follow();
-                        break;
-
                     case "Patrol":
                         Patrol();
+                        break;
+
+                    case "GhostPatrol":
+                        GhostPatrol();
                         break;
 
                     default:
@@ -77,11 +82,35 @@ public class Ai_mov_Scripts : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            switch (movScript)
+            {
+                case "SeekTarget":
+                    SeekTarget();
+                    break;
+
+                case "Wander":
+                    Wander();
+                    break;
+
+                case "Patrol":
+                    Patrol();
+                    break;
+
+                case "GhostPatrol":
+                    GhostPatrol();
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
     void SeekTarget()
     {
-        agent.destination = target.transform.position;
+        agent.SetDestination(target.transform.position);
     }
 
     void Seek(Vector3 destination)
@@ -125,16 +154,13 @@ public class Ai_mov_Scripts : MonoBehaviour
         }
     }
 
-    void Follow()
+    void GhostPatrol()
     {
         float distance = Vector3.Distance(transform.position, target.transform.position);
-        if(distance >= 1.5)
-        {
-            Seek(target.transform.position);
+        if(distance <= 8) {
+            if (agent.isStopped) { agent.isStopped = false; }
+            else { Patrol(); }
         }
-        else
-        {
-            Seek(transform.position);
-        }
+        else { agent.isStopped = true; }        
     }
 }
