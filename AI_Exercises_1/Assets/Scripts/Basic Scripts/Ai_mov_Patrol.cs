@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Ai_mov_Patrol : MonoBehaviour
 {
 
     public NavMeshAgent agent;
+    public GameObject target;
 
     [Range(0, 100)] public float speed = 5f;
 
@@ -15,6 +17,8 @@ public class Ai_mov_Patrol : MonoBehaviour
     public GameObject[] waypoints;
     int patrolWP = 0;
     int direction = 0;
+    public bool humanBehaviour = true;
+    public bool ghostPatrol = false;
 
     float freq = 0f;
 
@@ -46,14 +50,23 @@ public class Ai_mov_Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        freq += Time.deltaTime;
-        if (freq > 0.5)
+        if (!humanBehaviour)
         {
-            freq -= 0.5f;
-            if (agent != null)
+            freq += Time.deltaTime;
+            if (freq > 0.5)
             {
-                Patrol();
+                freq -= 0.5f;
+                if (agent != null)
+                {
+                    if(ghostPatrol) { GhostPatrol(); }
+                    else { Patrol(); }
+                }
             }
+        }
+        else
+        {
+            if (ghostPatrol) { GhostPatrol(); }
+            else { Patrol(); }
         }
     }
 
@@ -67,5 +80,16 @@ public class Ai_mov_Patrol : MonoBehaviour
 
             if (patrolWP < 0) { patrolWP = waypoints.Length - 1; }
         }
+    }
+
+    void GhostPatrol()
+    {
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+        if (distance <= 8)
+        {
+            if (agent.isStopped) { agent.isStopped = false; }
+            else { Patrol(); }
+        }
+        else { agent.isStopped = true; }
     }
 }
