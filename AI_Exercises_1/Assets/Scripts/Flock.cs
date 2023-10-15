@@ -25,7 +25,6 @@ public class Flock : MonoBehaviour
 
         if (Random.Range(0, 100) < FlockingManager.myManager.freqFlock)
         {
-            //ApplyRules();
             AllTogether();
         }
 
