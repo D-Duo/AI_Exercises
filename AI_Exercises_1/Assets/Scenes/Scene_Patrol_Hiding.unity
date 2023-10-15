@@ -1207,18 +1207,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beePrefab: {fileID: 646623219415092720, guid: 6fbd6b3f7dedfa548a4a6cae4338844e, type: 3}
   LiderPrefab: {fileID: 4233850225578375260, guid: 797d591657f5ac74ba5e97a2854cfe88, type: 3}
-  numBee: 20
+  numBee: 50
   allBees: []
   hiveLimits: {x: 5, y: 5, z: 5}
   goalPos: {x: 0, y: 0, z: 0}
-  freqFlock: 10
+  freqFlock: 15
   RandGoal: 0
-  FollowLider: 0
-  Max_Speed: 6.53
-  Min_Speed: 1
-  Neighbour_Dist: 1
+  Max_Speed: 8
+  Min_Speed: 5
+  Neighbour_Dist: 3
   Rotation_Speed: 1
-  Separation_Dist: 10
 --- !u!4 &1283483942
 Transform:
   m_ObjectHideFlags: 0

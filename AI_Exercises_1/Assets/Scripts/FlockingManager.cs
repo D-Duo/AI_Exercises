@@ -16,10 +16,10 @@ public class FlockingManager : MonoBehaviour
     public bool RandGoal = false;
     Vector3 randPos;
 
-    [Header("Lider Settings")]
+    //[Header("Lider Settings")]
 
-    public bool FollowLider = false;
-    int numLiders = 0;
+    //public bool FollowLider = false;
+    //int numLiders = 0;
 
     [Header("Bee Settings")]
 
@@ -27,7 +27,6 @@ public class FlockingManager : MonoBehaviour
     [Range(1, 10)] public float Min_Speed;
     [Range(1, 10)] public float Neighbour_Dist;
     [Range(1, 10)] public float Rotation_Speed;
-    [Range(1, 10)] public float Separation_Dist = 1.0f;
 
 
 
@@ -50,21 +49,21 @@ public class FlockingManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(FollowLider && numLiders == 0)
-        {
-            LiderPrefab = Instantiate(LiderPrefab, randPos, Quaternion.identity);
-            LiderPrefab.tag = "Lider";
-            numLiders++;
-        }
+        //if(FollowLider && numLiders == 0)
+        //{
+        //    LiderPrefab = Instantiate(LiderPrefab, randPos, Quaternion.identity);
+        //    LiderPrefab.tag = "Lider";
+        //    numLiders++;
+        //}
         
-        if(!FollowLider)
-        {
-            LiderPrefab.SetActive(false);
-        }
-        else
-        {
-            LiderPrefab.SetActive(true);
-        }
+        //if(!FollowLider)
+        //{
+        //    LiderPrefab.SetActive(false);
+        //}
+        //else
+        //{
+        //    LiderPrefab.SetActive(true);
+        //}
       
         
         if (Random.Range(0, 100) < 1 && RandGoal)
