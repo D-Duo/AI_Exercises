@@ -364,6 +364,8 @@
 "Assets/Scripts/Basic Scripts/Ai_mov_Wander.cs"
 "Assets/Scripts/Flock.cs"
 "Assets/Scripts/FlockingManager.cs"
+"Assets/Scripts/MouseMove.cs"
+"Assets/Scripts/Moves.cs"
 -langversion:9.0
 
 /deterministic
