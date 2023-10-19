@@ -17,7 +17,7 @@ public class Moves : MonoBehaviour
     void Start()
     {
         agent = this.GetComponent<NavMeshAgent>();
-        hidingSpots = GameObject.FindGameObjectsWithTag("Hide");
+        hidingSpots = GameObject.FindGameObjectsWithTag("hide");
     }
 
     public void Seek(Vector3 location)

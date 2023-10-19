@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Scene_Zombies.unity
+- path: Assets/Scenes/Finite_StateMachine.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
