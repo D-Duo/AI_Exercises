@@ -25,31 +25,7 @@ public class Ai_mov_Wander : MonoBehaviour
         if (freq > 0.5)
         {
             freq -= 0.5f;
-            if (agent != null) { Wander(); }
-        }
-    }
-
-    void Wander()
-    {
-        if (agent.remainingDistance <= agent.stoppingDistance)
-        {
-            Vector3 destination = Vector3.zero;
-            Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
-            randomDirection += transform.position;
-            if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, walkRadius, 1))
-            {
-                destination = hit.position;
-            }
-
-            if(restingTime == 0)
-            {
-                agent.SetDestination(destination);
-                restingTime = Random.Range(0, maxRestingTime);
-            }
-            else if(restingTime >= 0)
-            {
-                restingTime--;
-            }
+            if (agent != null) { StartCoroutine(AI_Scripts.Mov_Scripts.Wander(agent, walkRadius, 1, restingTime)); }
         }
     }
 }
