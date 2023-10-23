@@ -17,13 +17,7 @@ public class Ai_mov_Seek : MonoBehaviour
         if (freq > 0.5)
         {
             freq -= 0.5f;
-            Seek();
+            AI_Scripts.Mov_Scripts.SeekTarget(agent, target.transform);
         }
     }
-
-    void Seek()
-    {
-        agent.destination = target.transform.position;
-    }
-
 }
