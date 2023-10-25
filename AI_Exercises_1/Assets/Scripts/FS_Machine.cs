@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class FS_Machine : MonoBehaviour
 {
@@ -10,11 +13,11 @@ public class FS_Machine : MonoBehaviour
     public NavMeshAgent police;
     public GameObject key;
 
-    private float _stealDist = 1;
+    private float _stealDist = 2;
 
     [Header("Wander Settings")]
 
-    [Range(0, 100)] public float WanderSpeed = 1f;
+    [Range(0, 10)] public float WanderSpeed = 1f;
     [Range(1, 500)] public float walkRadius = 10f;
     [Range(0, 100)] public int maxRestingTime = 5;
     int restingTime = 1;
@@ -27,7 +30,8 @@ public class FS_Machine : MonoBehaviour
 
     [Header("Hide Settings")]
 
-
+    GameObject[] hidingSpots;
+    [Range(0, 10)] public float HidingSpeed = 5f;
 
     [Header("Coroutine Settings")]
 
@@ -38,6 +42,8 @@ public class FS_Machine : MonoBehaviour
 
     IEnumerator Start()
     {
+        hidingSpots = GameObject.FindGameObjectsWithTag("hide");
+
         state = Wander;
 
         while (enabled)
@@ -71,7 +77,7 @@ public class FS_Machine : MonoBehaviour
         bool stolen = false;
         while (Vector3.Distance(police.transform.position, key.transform.position) > SafeDistance)
         {
-            if (Vector3.Distance(key.transform.position, transform.position) < ApproachSpeed)
+            if (Vector3.Distance(key.transform.position, transform.position) < _stealDist)
             {
                 stolen = true;
                 break;
@@ -82,11 +88,12 @@ public class FS_Machine : MonoBehaviour
         if (stolen)
         {
             Steal();
+            agent.speed = HidingSpeed;
             state = Hide;
         }
         else
         {
-            agent.speed = 1f;
+            agent.speed = WanderSpeed;
             state = Wander;
         }
     }
@@ -95,7 +102,7 @@ public class FS_Machine : MonoBehaviour
     {
         while (true)
         {
-
+            HideF();
 
             yield return wait;
         }
@@ -116,6 +123,14 @@ public class FS_Machine : MonoBehaviour
 
     void Steal()
     {
+        foreach (Transform child in key.transform)
+        {
+            Renderer renderer = child.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.enabled = false;
+            }
+        }
         key.GetComponent<Renderer>().enabled = false;
         Debug.Log("Stolen");
     }
@@ -125,7 +140,7 @@ public class FS_Machine : MonoBehaviour
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             Vector3 destination = Vector3.zero;
-            Vector3 randomDirection = Random.insideUnitSphere * walkRadius;
+            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * walkRadius;
             randomDirection += transform.position;
             if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, walkRadius, 1))
             {
@@ -135,7 +150,7 @@ public class FS_Machine : MonoBehaviour
             if (restingTime == 0)
             {
                 Seek(destination);
-                restingTime = Random.Range(0, maxRestingTime);
+                restingTime = UnityEngine.Random.Range(0, maxRestingTime);
             }
             else if (restingTime >= 0)
             {
@@ -144,4 +159,14 @@ public class FS_Machine : MonoBehaviour
         }
     }
 
+    void HideF()
+    {
+        Func<GameObject, float> distance = (hs) => Vector3.Distance(police.transform.position, hs.transform.position);
+        GameObject hidingSpot = hidingSpots.Select(ho => (distance(ho), ho)).Min().Item2;
+        Vector3 dir = hidingSpot.transform.position - police.transform.position;
+        Ray backRay = new Ray(hidingSpot.transform.position, -dir.normalized);
+        RaycastHit info;
+        hidingSpot.GetComponent<Collider>().Raycast(backRay, out info, 50f);
+        Seek(info.point + dir.normalized);
+    }
 }
