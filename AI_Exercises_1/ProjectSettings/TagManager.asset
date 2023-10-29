@@ -9,6 +9,7 @@ TagManager:
   - Lider
   - Human
   - Zombie
+  - hide2
   layers:
   - Default
   - TransparentFX

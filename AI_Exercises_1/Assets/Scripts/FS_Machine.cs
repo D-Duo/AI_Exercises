@@ -21,10 +21,10 @@ public class FS_Machine : MonoBehaviour
     [Range(1, 500)] public float walkRadius = 10f;
     [Range(0, 100)] public int maxRestingTime = 5;
     int restingTime = 1;
+    bool firstWander = true;
 
     [Header("Approach Settings")]
 
-    //[Range(0, 100)] public float f
     [Range(0, 100)] public float SafeDistance;
     [Range(0, 10)] public float ApproachSpeed = 5f;
 
@@ -35,14 +35,13 @@ public class FS_Machine : MonoBehaviour
 
     [Header("Coroutine Settings")]
 
-    //public bool enabled = true;
     private WaitForSeconds wait = new WaitForSeconds(0.05f);
     delegate IEnumerator State();
     private State state;
 
     IEnumerator Start()
     {
-        hidingSpots = GameObject.FindGameObjectsWithTag("hide");
+        hidingSpots = GameObject.FindGameObjectsWithTag("hide2");
 
         state = Wander;
 
@@ -93,6 +92,7 @@ public class FS_Machine : MonoBehaviour
         }
         else
         {
+            firstWander = true;
             agent.speed = WanderSpeed;
             state = Wander;
         }
@@ -137,6 +137,12 @@ public class FS_Machine : MonoBehaviour
 
     void WanderF()
     {
+        if(firstWander)
+        {
+            agent.ResetPath(); 
+            firstWander = false;
+        }
+
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             Vector3 destination = Vector3.zero;
