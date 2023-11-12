@@ -10,6 +10,7 @@ TagManager:
   - Human
   - Zombie
   - hide2
+  - hide3
   layers:
   - Default
   - TransparentFX

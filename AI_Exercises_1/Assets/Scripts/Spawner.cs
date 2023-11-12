@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class SpawnerK : MonoBehaviour
 {
     public GameObject agentPrefab;
     public int numAgents = 5;

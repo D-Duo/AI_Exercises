@@ -7553,7 +7553,7 @@ GameObject:
   - component: {fileID: 410789862}
   m_Layer: 0
   m_Name: box_002
-  m_TagString: hide2
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -7566,7 +7566,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410789858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.68, y: 0.57603073, z: -10.97}
+  m_LocalPosition: {x: 13.91, y: 0.57603073, z: -11.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21517,7 +21517,7 @@ GameObject:
   - component: {fileID: 1347633592}
   m_Layer: 0
   m_Name: box_002 (3)
-  m_TagString: hide2
+  m_TagString: hide3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -21530,7 +21530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347633588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.02, y: 0.57603073, z: -18.39}
+  m_LocalPosition: {x: 25.94, y: 0.57603073, z: -17.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28065,7 +28065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2456287271524139945, guid: 824d16da0ad160c49ae5f0456c4e570a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.74
+      value: -48.57
       objectReference: {fileID: 0}
     - target: {fileID: 2456287271524139945, guid: 824d16da0ad160c49ae5f0456c4e570a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -28073,7 +28073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2456287271524139945, guid: 824d16da0ad160c49ae5f0456c4e570a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -44.4
+      value: -29.4
       objectReference: {fileID: 0}
     - target: {fileID: 2456287271524139945, guid: 824d16da0ad160c49ae5f0456c4e570a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28110,11 +28110,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 178305125311271826, guid: 824d16da0ad160c49ae5f0456c4e570a, type: 3}
   m_PrefabInstance: {fileID: 1805150820}
   m_PrefabAsset: {fileID: 0}
---- !u!195 &1805150822 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 3638684044375419098, guid: 824d16da0ad160c49ae5f0456c4e570a, type: 3}
-  m_PrefabInstance: {fileID: 1805150820}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1805150823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28124,18 +28119,84 @@ MonoBehaviour:
   m_GameObject: {fileID: 1805150821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dc7d41d0c0d0044eaccde98f2c160bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 422fb6956201c7944ae2113a1a53b0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1805150822}
+  maxTasksPerTick: 500
+  behavior: {fileID: 11400000, guid: 08a38f43478fcda418b65990f1461cca, type: 2}
+  paused: 0
+  restartWhenFinished: 0
+  blackboard:
+    intParams: 
+    intParamsNames: []
+    intParamsLostDefaultValue: 
+    boolParams: 
+    boolParamsNames: []
+    boolParamsLostDefaultValue: 
+    floatParams:
+    - 3
+    floatParamsNames:
+    - closeDistance
+    floatParamsLostDefaultValue: 
+    stringParams: []
+    stringParamsNames: []
+    stringParamsLostDefaultValue: 
+    colorParams: []
+    colorParamsNames: []
+    colorParamsLostDefaultValue: 
+    objectParams:
+    - {fileID: 1805150821}
+    - {fileID: 232574537}
+    - {fileID: 1005842568}
+    objectParamsNames:
+    - Hidder
+    - target
+    - area
+    objectParamsLostDefaultValue: 
+    layerMaskParams: []
+    layerMaskParamsNames: []
+    layerMaskParamsLostDefaultValue: 
+    enumParamsNames: []
+    enumParamsLostDefaultValue: 
+    vector2Params: []
+    vector2ParamsNames: []
+    vector2ParamsLostDefaultValue: 
+    vector3Params: []
+    vector3ParamsNames: []
+    vector3ParamsLostDefaultValue: 
+    vector4Params: []
+    vector4ParamsNames: []
+    vector4ParamsLostDefaultValue: 
+    rectParams: []
+    rectParamsNames: []
+    rectParamsLostDefaultValue: 
+    animationCurveParams: []
+    animationCurveParamsNames: []
+    animationCurveParamsLostDefaultValue: 
+    boundsParams: []
+    boundsParamsNames: []
+    boundsParamsLostDefaultValue: 
+    gradientParams: []
+    gradientParamsNames: []
+    gradientParamsLostDefaultValue: 
+    quaternionParams: []
+    quaternionParamsNames: []
+    quaternionParamsLostDefaultValue: 
+--- !u!114 &1805150825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805150821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e121559fbbc2def8c7f84846b680f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
   police: {fileID: 1677215693}
-  key: {fileID: 232574537}
-  WanderSpeed: 1
-  walkRadius: 10
-  maxRestingTime: 5
-  SafeDistance: 10
-  ApproachSpeed: 5
-  HidingSpeed: 2
+  floor: {fileID: 1005842570}
 --- !u!1 &1806485371
 GameObject:
   m_ObjectHideFlags: 0

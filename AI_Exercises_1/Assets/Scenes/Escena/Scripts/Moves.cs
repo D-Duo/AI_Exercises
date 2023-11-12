@@ -4,12 +4,15 @@
     https://learn.unity.com/course/artificial-intelligence-for-beginners
 */
 
-﻿using UnityEngine;
+using System.Linq;
+using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class Moves : MonoBehaviour
 {
     public GameObject target;
+    public NavMeshAgent police;
     public Collider floor;
     GameObject[] hidingSpots;
     NavMeshAgent agent;
@@ -17,7 +20,7 @@ public class Moves : MonoBehaviour
     void Start()
     {
         agent = this.GetComponent<NavMeshAgent>();
-        hidingSpots = GameObject.FindGameObjectsWithTag("hide");
+        hidingSpots = GameObject.FindGameObjectsWithTag("hide3");
     }
 
     public void Seek(Vector3 location)
@@ -67,9 +70,9 @@ public class Moves : MonoBehaviour
         float wanderDistance = 10;
         float wanderJitter = 1;
 
-        wanderTarget += new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitter,
+        wanderTarget += new Vector3(UnityEngine.Random.Range(-1.0f, 1.0f) * wanderJitter,
                                         0,
-                                        Random.Range(-1.0f, 1.0f) * wanderJitter);
+                                        UnityEngine.Random.Range(-1.0f, 1.0f) * wanderJitter);
         wanderTarget.Normalize();
         wanderTarget *= wanderRadius;
 
@@ -115,5 +118,17 @@ public class Moves : MonoBehaviour
 
         Seek(info.point + chosenDir.normalized);
 
+    }
+
+    public Vector3 HideValue()
+    {
+        Func<GameObject, float> distance = (hs) => Vector3.Distance(police.transform.position, hs.transform.position);
+        GameObject hidingSpot = hidingSpots.Select(ho => (distance(ho), ho)).Min().Item2;
+        Vector3 dir = hidingSpot.transform.position - police.transform.position;
+        Ray backRay = new Ray(hidingSpot.transform.position, -dir.normalized);
+        RaycastHit info;
+        hidingSpot.GetComponent<Collider>().Raycast(backRay, out info, 50f);
+
+        return (info.point + dir.normalized);
     }
 }
