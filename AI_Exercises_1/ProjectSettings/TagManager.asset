@@ -11,6 +11,10 @@ TagManager:
   - Zombie
   - hide2
   - hide3
+  - Hide
+  - Cop
+  - Treasure
+  - Robber
   layers:
   - Default
   - TransparentFX
