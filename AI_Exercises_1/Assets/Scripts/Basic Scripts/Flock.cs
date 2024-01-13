@@ -12,6 +12,8 @@ public class Flock : MonoBehaviour
         speed = Random.Range(FlockingManager.myManager.Min_Speed, FlockingManager.myManager.Max_Speed);
         minS = FlockingManager.myManager.Min_Speed;
         maxS = FlockingManager.myManager.Max_Speed;
+
+
     }
 
     // Update is called once per frame

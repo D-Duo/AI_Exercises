@@ -10,7 +10,7 @@ public class FlockingManager : MonoBehaviour
     public GameObject LiderPrefab;
     public int numBee = 20;
     public GameObject[] allBees;
-    public Vector3 hiveLimits = new Vector3(5, 5, 5);
+    public Vector3 hiveLimits = new Vector3(5, 0, 5);
     public Vector3 goalPos = Vector3.zero;
     [Range(1, 100)] public int freqFlock = 10;
     public bool RandGoal = false;
@@ -43,28 +43,13 @@ public class FlockingManager : MonoBehaviour
             allBees[i] = (GameObject)Instantiate(beePrefab, randPos, Quaternion.identity);
         }
         myManager = this;
+
         goalPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        //if(FollowLider && numLiders == 0)
-        //{
-        //    LiderPrefab = Instantiate(LiderPrefab, randPos, Quaternion.identity);
-        //    LiderPrefab.tag = "Lider";
-        //    numLiders++;
-        //}
-        
-        //if(!FollowLider)
-        //{
-        //    LiderPrefab.SetActive(false);
-        //}
-        //else
-        //{
-        //    LiderPrefab.SetActive(true);
-        //}
-      
+    {    
         
         if (Random.Range(0, 100) < 1 && RandGoal)
         {

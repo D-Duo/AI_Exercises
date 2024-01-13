@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class Perception : MonoBehaviour
 {
-    private Transform target;
+    public Transform target;
 
     public float wanderRadius = 10f;
     public float wanderTimer = 0f;
@@ -21,7 +21,7 @@ public class Perception : MonoBehaviour
     public Camera frustum;
     public LayerMask mask;
 
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private RaycastHit hit;
 
     Renderer rend;
