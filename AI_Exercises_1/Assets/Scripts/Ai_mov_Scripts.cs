@@ -43,9 +43,10 @@ public class Ai_mov_Scripts : MonoBehaviour
         }
 
         agent.speed = speed;
-        patrolWP = Random.Range(0, waypoints.Length);
-        direction = Random.Range(0, 2);
-
+        //patrolWP = Random.Range(0, waypoints.Length);
+        //direction = Random.Range(0, 2);
+        patrolWP = 0;
+        direction = 0;
     }
 
     // Update is called once per frame

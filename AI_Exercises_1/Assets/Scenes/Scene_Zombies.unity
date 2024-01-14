@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 773452561}
   - component: {fileID: 773452560}
   - component: {fileID: 773452559}
-  - component: {fileID: 773452558}
+  - component: {fileID: 773452563}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -597,21 +597,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &773452558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773452557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b5f6d2efb87b5748a98990da483b7a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 1848891532884605927, guid: 731369607dae55b4ca01ffdc9946c948, type: 3}
-  numAgents: 5
-  Range: {x: 5, y: 5}
 --- !u!135 &773452559
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -690,6 +675,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &773452563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773452557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5f6d2efb87b5748a98990da483b7a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentPrefab: {fileID: 1848891532884605927, guid: 731369607dae55b4ca01ffdc9946c948, type: 3}
+  numAgents: 5
+  Range: {x: 5, y: 5}
 --- !u!1001 &823550002
 PrefabInstance:
   m_ObjectHideFlags: 0

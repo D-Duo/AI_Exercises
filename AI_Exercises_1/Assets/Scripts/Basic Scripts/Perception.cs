@@ -29,7 +29,8 @@ public class Perception : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rend = GetComponent<Renderer>();
+        if(GetComponent<Renderer>() != null) { rend = GetComponent<Renderer>(); }
+
         agent = GetComponent<NavMeshAgent>();
 
         StateColor();
@@ -66,13 +67,16 @@ public class Perception : MonoBehaviour
 
     void StateColor()
     {
-        if (!isSpoted)
+        if(rend != null)
         {
-            rend.material.SetColor("_Color", Color.green);
-        }
-        else
-        {
-            rend.material.SetColor("_Color", Color.red);
+            if (!isSpoted)
+            {
+                rend.material.SetColor("_Color", Color.green);
+            }
+            else
+            {
+                rend.material.SetColor("_Color", Color.red);
+            }
         }
     }
 }
